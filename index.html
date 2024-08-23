@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="estilo.css" rel="stylesheet" type="text/css">
+    <script src="javascript.js" defer></script>
+</head>
+<body>
+    <!-- Crea un sitio que implemente dos textbox llamados "nombre" y "nota" para representar el ingreso de los dos datos en un map.
+    Además, deberá agregar dos botones que implementen las funciones "agregar"  y "promedio".
+    Dentro del script deberá crear la función "agregar" para registrar estudiantes y sus calificaciones.
+    Luego, deberá implementa una función llamada "promedio" que calcule el promedio de todas las calificaciones ingresadas. -->
+    
+    <label class="margin" for="nombre">Estudiante:</label>
+    <input class="margin" type="text" name="nombre" id="nombre" required>
+    <br> <br>
+    <label for="calificación">Nota:</label>
+    <input type="number" min="1" max="12" name="calificación" id="calificación">
+    <br> <br>
+    <input type="button" id="agregar" value="agregar">
+    <input type="button" id="eliminar" value="eliminar">
+    <br>
+    <input type="button" id="promedio" value="promedio">
+    <input type="button" id="lista" value="lista">
+    <br>
+    <h1>Al usar la opción "Eliminar" tenga en cuenta que solo se toma en consideración el Nombre que se ingreso previamente al sistema.</h1>
+</body>
+</html>
