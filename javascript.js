@@ -3,6 +3,7 @@ const averageButton = document.getElementById("promedio");
 const listaButton = document.getElementById("lista");
 const eliminarButton = document.getElementById("eliminar");
 const verifButton = document.getElementById("verificar");
+const editButton = document.getElementById("editar");
 let constNombres = "";
 
 const datos = new Map ([
@@ -35,17 +36,29 @@ function promedio(){
             totalAlumnos++;
             constNombres += (nombre + ", ");
         })
-    
-        promedioNotas = (totalNota / totalAlumnos);
-    
-        console.log("Cantidad de notas ingresadas = " + totalAlumnos);
-        console.log("Suma total de todas las notas = " + totalNota);
-        console.log("El promedio de las notas es = " + promedioNotas);
-        window.alert("Integrando las notas de " + constNombres + " al promedio." + "\n\n" 
-                     + "Cantidad de notas ingresadas = " + totalAlumnos + ",\n\n"
-                     + "la suma total de todas las notas = " + totalNota + ",\n\n" 
-                     + "el promedio de las notas es = " + promedioNotas);
+        
+        promedioNotasCrudo = (totalNota / totalAlumnos);
+        promedioNotasRedondeado = Math.round(promedioNotasCrudo);
 
+        if (Number.isInteger(promedioNotasCrudo)){
+            console.log("Cantidad de notas ingresadas = " + totalAlumnos);
+            console.log("Suma total de todas las notas = " + totalNota);
+            console.log("El promedio de las notas crudo es = " + promedioNotasCrudo);
+            window.alert("Integrando las notas de " + constNombres + " al promedio." + "\n\n" 
+                + "Cantidad de notas ingresadas = " + totalAlumnos + ",\n\n"
+                + "la suma total de todas las notas = " + totalNota + ",\n\n" 
+                + "el promedio de las notas crudo es = " + promedioNotasCrudo);
+        } else {
+            console.log("Cantidad de notas ingresadas = " + totalAlumnos);
+            console.log("Suma total de todas las notas = " + totalNota);
+            console.log("El promedio de las notas crudo es = " + promedioNotasCrudo);
+            console.log("El promedio de las notas redondeado es = " + promedioNotasRedondeado);
+            window.alert("Integrando las notas de " + constNombres + " al promedio." + "\n\n" 
+                         + "Cantidad de notas ingresadas = " + totalAlumnos + ",\n\n"
+                         + "la suma total de todas las notas = " + totalNota + ",\n\n" 
+                         + "el promedio de las notas crudo es = " + promedioNotasCrudo + ",\n\n"
+                         + "el promedio de las notas redondeado es = " + promedioNotasRedondeado);
+        }
     }
 }
 
@@ -69,7 +82,9 @@ addButton.addEventListener("click", function(){
     let verifNombre1 = nombre.length < 2;
     let verifNota = !isNaN(nota) && nota < 1;
     let verifNota1 = nota > 12;
-    if (verifNombre || verifNota){
+    if(datos.has(nombre)){
+        window.alert("No puedes agregar un estudiante que ya esta.");
+    } else if (verifNombre || verifNota){
         window.alert("Verifica que lo ingresado en el apartado estudiante no contenga espacios al principio y que este bien la nota.");
     } else if (verifNota1) {
         window.alert("la nota que estas queriendo ingresar no es valida.")
@@ -133,4 +148,18 @@ verifButton.addEventListener("click", function(){
         window.alert("Ese estudiante no se encuentra en la lista.");
     }
 
+});
+
+editButton.addEventListener("click", function(){
+let nombre = document.getElementById("nombre").value;
+let nota = document.getElementById("calificación").value;
+
+    if(!datos.has(nombre)){
+        window.alert("No puedes editar la nota de un estudiante que no existe.");
+    } else if(datos.get(nombre) == nota) {
+        window.alert("Estas cambiando la nota por una nota igual...");
+    } else {
+        window.alert("Cambiando la nota al estudiante " + nombre + " de un " + datos.get(nombre) + " a " + nota + ".");
+        datos.set(nombre, nota);
+    }
 });
