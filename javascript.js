@@ -75,6 +75,8 @@ addButton.addEventListener("click", function(){
         window.alert("la nota que estas queriendo ingresar no es valida.")
     } else if (verifNombre1) {
         window.alert("Todo el mundo sabe que no existe un nombre y apellidos tan cortos, favor de escribir bien.");
+    } else if (nombre.endsWith(" ")){
+        window.alert("Ojo los espacios al final del campo estudiante...");
     } else {
         añadir(nombre, nota);
         console.log(datos);
@@ -100,8 +102,6 @@ eliminarButton.addEventListener("click", function(){
     let notaMap = datos.get(nombre);
     console.log(datos);
 
-    mapCont = "";
-
     let verifNombre = nombre[0] === " ";
     let verifNombre1 = nombre.length < 2;
     if (verifNombre){
@@ -112,10 +112,6 @@ eliminarButton.addEventListener("click", function(){
         window.alert("Retirando de la lista al estudiante " + nombre + ", con la nota " + notaMap + ".");
 
         datos.delete(nombre);
-
-        datos.forEach((nota, nombre) => {
-            mapCont += `Nombre: ${nombre}, Nota: ${nota}\n`;
-        });
     } else {
         window.alert("Ese estudiante no estaba en la lista.");
     }
